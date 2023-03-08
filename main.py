@@ -13,5 +13,22 @@ def task_multiply():
     print(int(first) * int(second))
 
 
+# Задача S. Шаблоны
+def task_template():
+    template = input()
+    message = input()
+
+    template = template.replace('?', r'([a-z]|\.)+')
+    template = template.replace('*', r'([a-z]|\.)*')
+
+    pattern = re.compile(template)
+    match = pattern.match(message)
+
+    if match is None:
+        print('NO')
+    else:
+        print('YES')
+
+
 if __name__ == '__main__':
     pass
