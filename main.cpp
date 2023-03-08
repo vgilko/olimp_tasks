@@ -31,7 +31,7 @@ void taskTemplates() {
         if (symb == '?') {
             newTemplate.append("([a-z]|\\.){1}");
         } else if (symb == '*') {
-            newTemplate.append("([a-z]|\\.)+");
+            newTemplate.append("([a-z]|\\.)*");
         } else {
             newTemplate.push_back(symb);
         }
