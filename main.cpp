@@ -12,12 +12,22 @@ void taskTemplates() {
     string messageTemplate;
     string message;
 
-    cin >> messageTemplate;
-    cin >> message;
+    getline(cin, messageTemplate);
+    getline(cin, message);
 
     string newTemplate;
 
-    for (auto symb: messageTemplate) {
+    if (messageTemplate == "") {
+        if (message == "") {
+            cout << "YES";
+        } else {
+            cout << "NO";
+        }
+
+        return;
+    }
+
+    for (auto& symb: messageTemplate) {
         if (symb == '?') {
             newTemplate.append("([a-z]|\\.){1}");
         } else if (symb == '*') {
