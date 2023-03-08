@@ -25,26 +25,64 @@ void taskTemplates() {
         }
 
         return;
-    }
+    } else {
+        if (message == "" && messageTemplate != "*") {
+            cout << "NO";
 
-    for (auto& symb: messageTemplate) {
-        if (symb == '?') {
-            newTemplate.append("([a-z]|\\.){1}");
-        } else if (symb == '*') {
-            newTemplate.append("([a-z]|\\.)*");
-        } else {
-            newTemplate.push_back(symb);
+            return;
         }
     }
 
-    bool isFound = regex_search(message, std::regex(newTemplate));
+    int messageStartIdx = 0;
+    for (int tempIdx = 0; tempIdx < messageTemplate.size(); tempIdx++) {
+        char currentTemplateSymb = messageTemplate[tempIdx];
 
-    cout << (isFound ? "YES" : "NO");
+        for (int messageIdx = messageStartIdx; messageIdx < message.size(); messageIdx++) {
+            char currentMessageSymb = message[messageIdx];
+
+            if (currentTemplateSymb == '*') {
+                // если конец слова
+                if (tempIdx == messageTemplate.size() - 1) {
+                    cout << "YES";
+                    return;
+                }
+
+                char nextTemplateSymb = messageTemplate[tempIdx + 1];
+
+                while (message[messageIdx] != nextTemplateSymb && messageIdx < message.size()) {
+                    messageIdx++;
+                }
+
+                messageStartIdx = messageIdx;
+                currentMessageSymb = message[messageIdx];
+                currentTemplateSymb = messageTemplate[tempIdx + 1];
+            } else if (currentTemplateSymb == '?') {
+                messageStartIdx = messageIdx + 1;
+
+                break;
+            }
+
+            if (currentTemplateSymb != currentMessageSymb) {
+                cout << "NO";
+                return;
+            } else {
+                messageStartIdx += 1;
+                break;
+            }
+        }
+
+
+    }
+
+    cout << "YES";
 }
 
 
 int main() {
-    taskTemplates();
+    while (true) {
+        taskTemplates();
+        cout << "\n---\n";
+    }
 
     return 0;
 }
