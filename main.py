@@ -18,6 +18,14 @@ def task_template():
     template = input()
     message = input()
 
+    if template == '':
+        if message == '':
+            print('YES')
+        else:
+            print('NO')
+
+        return
+
     template = template.replace('?', r'([a-z]|\.){1}')
     template = template.replace('*', r'([a-z]|\.)*')
 
