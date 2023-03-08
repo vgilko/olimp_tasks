@@ -18,7 +18,7 @@ def task_template():
     template = input()
     message = input()
 
-    template = template.replace('?', r'([a-z]|\.)+')
+    template = template.replace('?', r'([a-z]|\.){1}')
     template = template.replace('*', r'([a-z]|\.)*')
 
     pattern = re.compile(template)
@@ -31,4 +31,4 @@ def task_template():
 
 
 if __name__ == '__main__':
-    pass
+    task_template()
