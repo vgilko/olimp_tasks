@@ -57,6 +57,11 @@ void taskTemplates() {
                 currentMessageSymb = message[messageIdx];
                 currentTemplateSymb = messageTemplate[tempIdx + 1];
             } else if (currentTemplateSymb == '?') {
+                if (tempIdx == messageTemplate.size() - 1 &&
+                    messageIdx != message.size() - 1) {
+                    cout << "NO";
+                    return;
+                }
                 messageStartIdx = messageIdx + 1;
 
                 break;
@@ -70,8 +75,6 @@ void taskTemplates() {
                 break;
             }
         }
-
-
     }
 
     cout << "YES";
